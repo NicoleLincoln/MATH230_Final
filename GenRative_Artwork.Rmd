@@ -1,0 +1,32 @@
+---
+title: "GenRative Artwork" 
+description: |
+  This is my first piece of art that I created in RStudio and it opened my eyes to the possiblities that Rstudio can do. 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+***
+
+### Broken Glass
+
+***
+![](Reflection.png) 
+
+***
+
+### Movement With Light
+
+***
+
+![](Buzzlight.png) 
+
+***
+
+### Attachments 
+
+***
+
+![](Bucknell.png) 

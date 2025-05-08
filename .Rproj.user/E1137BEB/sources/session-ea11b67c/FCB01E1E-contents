@@ -1,0 +1,417 @@
+---
+title: "BREAKING WAVES"
+description: |
+  Exploring the Data Set: NCAA Records 1990-2023
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+data <- read.csv("https://raw.githubusercontent.com/KendrickMcD/NCAA_Swimming_Analysis/main/ncaa_record_progression.csv")
+library(ggplot2)
+attach(data)
+fr = data[season %in% c(2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015), ]
+```
+
+
+```{r}
+library(ggplot2)
+fm = data[data$gender == "F", ]
+
+library(ggplot2)
+library(treemapify)
+team_colors <- c(
+  "Arizona" = "#E87722",
+  "Arizona State" = "#8C1D40",
+  "Auburn" = "#0C234B",
+  "California" = "#003262",
+  "Colorado State" = "#174A3B",
+  "Florida" = "#FA4616",
+  "Georgia" = "#BA0C2F",
+  "Harvard" = "#A51C30",
+  "Indiana" = "#990000",
+  "LSU" = "#461D7C",
+  "Louisville" = "#AD0000",
+  "Michigan" = "#00274C",
+  "NC State" = "#CC0000",
+  "Nevada" = "#003366",
+  "Northwestern" = "#4E2A84",
+  "Notre Dame" = "#C99700",
+  "Southern California" = "#990000",
+  "Southern Methodist" = "#0033A0",
+  "Stanford" = "#8C1515",
+  "Tennessee" = "#FF8200",
+  "Texas" = "#BF5700",
+  "Texas A&M" = "#500000",
+  "UCLA" = "#2774AE",
+  "UNC" = "#7BAFD4",
+  "Virginia" = "#232D4B",
+  "Wisconsin" = "#C5050C"
+)
+teams <- c("Arizona", "Arizona State", "Auburn", "California", "Colorado State", "Florida", "Georgia", "Harvard", 
+           "Indiana", "Louisville", "LSU", "Michigan", "NC State", "Nevada", "Northwestern", "Notre Dame", 
+           "Southern California", "Southern Methodist", "Stanford", "Tennessee", "Texas", "Texas A&M", "UCLA", 
+           "UNC", "Virginia", "Wisconsin")
+
+records_broken <- c(22, 6, 28, 59, 1, 33, 21, 1, 10, 1, 1, 12, 6, 1, 2, 2, 5, 2, 46, 3, 38, 7, 1, 2, 22, 3)
+team_counts <- data.frame(team = teams, records_broken = records_broken)
+
+# Create a data frame
+team_data <- data.frame(team = teams, records_broken = records_broken)
+# Assuming 'team_counts' has a column 'team' for team names and 'n' for the number of records broken
+ggplot(team_counts, aes(area = records_broken, fill = team, label = team)) +
+  geom_treemap() +
+  geom_treemap_text(color = "white", place = "center", grow = TRUE) +
+  scale_fill_manual(values = team_colors) +
+  labs(title = "Teams with NCAA Records Broken", 
+       fill= "Team") +
+  theme_minimal()
+```
+***
+### NCAA Swim Teams with NCAA Records Broken Between 1990 and 2023
+
+  In the data set each row represents a record broken by either an individual or a relay for a team breaks a relay. Everyone in the NCAA has to be represented by a college team, so there are no NA, teams. The size of the boxes in the treemap represents the number of records broken. The larger the box the higher the number of records broken for each team. 
+
+***
+```{r}
+library(ggplot2)
+library(dplyr)
+library(ggwordcloud)
+library(png)
+
+set.seed(42)
+
+# Load image mask (make sure the path is correct)
+img <- readPNG("Screenshot 2025-05-03 170640.png")
+
+library(dplyr)
+library(ggplot2)
+library(ggwordcloud)
+
+# Step 1: Filter for males only
+male_data <- data %>%
+  filter(gender == "M")
+
+# Step 2: Count records per team (optional if not used directly)
+team_counts <- male_data %>%
+  count(team, name = "records_broken")
+
+# Step 3: Create the word cloud
+m= ggplot(
+  male_data,
+  aes(
+    label = team,
+    size = distance,
+    color = stroke
+  )
+) +
+  geom_text_wordcloud_area(
+    aes(
+      angle = 45 * sample(
+        -2:2,
+        nrow(male_data),  # ✅ now matches filtered data
+        replace = TRUE,
+        prob = c(1, 1, 4, 1, 1)
+      )
+    ),
+    mask = img,
+    rm_outside = TRUE
+  ) +
+  scale_size_area(max_size = 50) +
+  theme_minimal() +
+  scale_color_manual(values = c(
+     "FR" = "#BF5700",
+    "BK" = "#003262",
+    "BR" = "#174A3B",
+    "FL" = "#461D7C",
+    "IM" = "#7BAFD4", 
+    "Freestyle Relay" = "#BA0C2F", 
+    "Medley Relay" = "#C99700"
+  ))+
+  labs(title = "NCAA Male Swimmers' Records Broken By Event") +  
+  theme(
+    plot.title = element_text(face = "bold", size = 30, hjust = 0.5, family = "Helvetica"),  # Font settings
+    text = element_text(family = "Helvetica")  # Set default font family
+  )
+
+ggsave("male_swimmers.png", plot = m, width = 12, height = 12, dpi = 300)
+library(dplyr)
+library(ggplot2)
+library(ggwordcloud)
+
+# Step 1: Filter for males only
+female_data <- data %>%
+  filter(gender == "F")
+
+# Step 2: Count records per team (optional if not used directly)
+team_counts1 <- female_data %>%
+  count(team, name = "records_broken")
+
+# Step 3: Create the word cloud
+f=ggplot(
+  female_data,
+  aes(
+    label = team,
+    size = distance,
+    color = stroke
+  )
+) +
+  geom_text_wordcloud_area(
+    aes(
+      angle = 45 * sample(
+        -2:2,
+        nrow(female_data),  # ✅ now matches filtered data
+        replace = TRUE,
+        prob = c(1, 1, 4, 1, 1)
+      )
+    ),
+    mask = img,
+    rm_outside = TRUE
+  ) +
+  scale_size_area(max_size = 50) +
+  theme_minimal() +
+  scale_color_manual(values = c(
+    "FR" = "#BF5700",
+    "BK" = "#003262",
+    "BR" = "#174A3B",
+    "FL" = "#461D7C",
+    "IM" = "#7BAFD4", 
+    "Freestyle Relay" = "#BA0C2F", 
+    "Medley Relay" = "#C99700"
+  ))+
+  labs(title = "NCAA Female Swimmers' Records Broken By Event") +  
+  theme(
+    plot.title = element_text(face = "bold", size = 30, hjust = 0.5, family = "Helvetica"),  # Font settings
+    text = element_text(family = "Helvetica")  # Set default font family
+  )
+ggsave("female_swimmers.png", plot = f, width = 12, height = 12, dpi = 300)
+library(dplyr)
+
+```
+<div style="display: flex; justify-content: center; gap: 20px;">
+
+<div style="flex: 1; text-align: center;">
+  <img src="male_swimmers.png" alt="Male Swimmers" width="400">
+</div>
+
+<div style="flex: 1; text-align: center;">
+  <img src="female_swimmers.png" alt="Female Swimmers" width="400">
+</div>
+
+</div>
+<div style="display: flex; gap: 30px; justify-content: center;">
+
+<!-- Table 1: Color to Stroke -->
+<div style="flex: 1;">
+  
+**Key to Understnding : Color → Stroke**
+
+| Color       | Stroke             |
+|-------------|--------------------|
+| Orange      | Freestyle          |
+| Dark Blue   | Backstroke         |
+| Green       | Breaststroke       |
+| Purple      | Butterfly          |
+| Light Blue  | Individual Medley  |
+| Red         | Freestyle Relay    |
+| Yellow      | Medley Relay       |
+
+</div>
+
+<!-- Table 2: Size to Distance -->
+<div style="flex: 1;">
+  
+**Key to Understanding : Size → Distance**
+
+| Size   | Distance Description                          |
+|--------|-----------------------------------------------|
+| Small  | Shorter distances (e.g., 50 yards is the shortest distance)            |
+| Large  | Longer distances (e.g., up to 1650 yards is the longest distance)     |
+
+</div>
+
+</div>
+
+***
+### The Type of Events that Each School Has Broken Records For
+
+  For this word map is similar to the one above, in the sense the you can see the names of each college. Each name of a college represents one record broken for that college. This visualization looks closer at the records in terms of both stroke and distance. The key gives insight as to how to read the tree map to understand which team dominates each event in a unique way. 
+  
+***
+```{r}
+olympians <- data[data$name %in% c(
+   "Maggie MacNeil","Gretchen Walsh","Kate Douglass", "Abbey Weitzeil","Erika Brown","Simone Manuel","Olivia Smoliga","Kara Lynn Joyce","Maritza Correia","Amy Van Dyken","Caeleb Dressel","Cesar Cielo","Anthony Ervin","Matt Biondi", "Missy Franklin", "Dana Vollmer", "Natalie Coughlin", "Jenny Thompson", "Katie Ledecky", "Allison Schmitt", "Janet Evans", "Peter Vanderkaay", "Ryan Murphy", "Ryan Lochte", "Aaron Peirsol", "Lilly King", "Rebecca Soni", "Brendan Hansen", "Joe Schooling", "Ian Crocker", "Tom Shields", "Leon Marchand", "Hugo González", "Chase Kalisz", "Tyler Clary", "Alex Walsh"
+  ), ]
+
+non_olympians <- data[!(data$name %in% olympians$name), ]
+
+data$status <- ifelse(data$name %in% olympians$name, "Olympian", "Non-Olympian")
+fr$status <- ifelse(fr$name %in% olympians$name, "Olympian", "Non-Olympian")
+
+```
+
+```{r}
+library(dplyr)
+fr$event <- data$event[data$season %in% c(2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015)]
+
+max_gaps <- max_gaps %>%
+  mutate(max_gap = ifelse(is.infinite(max_gap), NA, max_gap))
+ggplot(max_gaps, aes(x = reorder(team, -max_gap), y = max_gap, fill = team)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = max_gap), vjust = -1, size = 3) +  # <- This adds the numbers
+  scale_fill_manual(values = team_colors) +
+  labs(
+    title = "Maximum Seasons Between Records by Team",
+    x = "Team",
+    y = "Max Seasons Between Records"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size= 9, angle = 45, hjust = 1))+
+  expand_limits(y = 25)+ 
+  theme(legend.position = "right", legend.justification = "center")+
+  theme(legend.position = "none")+
+  scale_x_discrete(drop = TRUE)
+
+
+
+```
+***
+
+### How Long Has Each Team Gone Without Breaking An NCAA Record? 
+
+  The number of seasons that each team has gone without breaking an NCAA record. Plotting the teams by the maximum number od seasons between records gives the viewer a look into the longest period of time a school has gone without breaking a record based on the date that records were broken for each team. 
+  
+***
+
+```{r}
+library(dplyr)
+
+pie_data <- olympians %>%
+  filter(gender == "M") %>%
+  count(team) %>%
+  mutate(
+    percent = n / sum(n),
+    label_percent = scales::percent(percent)  # add percentage for labels
+  )
+
+ggplot(pie_data, aes(x = "", y = percent, fill = team)) +
+  geom_col(width = 1, color = "white") +
+  coord_polar("y") +
+  scale_fill_manual(
+    values = team_colors, 
+    labels = paste0(pie_data$team, ": ", pie_data$label_percent)  # Add percentage next to team name in legend
+  ) + 
+  theme_void() +
+  labs(title = "Team Distribution (Male Olympians)", fill= "Team") +
+  theme(
+    legend.position = "bottom", 
+    plot.title = element_text(face = "bold")
+  )
+
+pie_data <- olympians %>%
+  filter(gender == "F") %>%
+  count(team) %>%
+  mutate(
+    percent = n / sum(n),
+    label_percent = scales::percent(percent)  # add percentage for labels
+  )
+
+ggplot(pie_data, aes(x = "", y = percent, fill = team)) +
+  geom_col(width = 1, color = "white") +
+  coord_polar("y") +
+  scale_fill_manual(
+    values = team_colors, 
+    labels = paste0(pie_data$team, ": ", pie_data$label_percent)  # Add percentage next to team name in legend
+  ) + 
+  theme_void() +
+  labs(title = "Team Distribution (Female Olympians)", fill= "Team") +
+  theme(
+    legend.position = "bottom", 
+    plot.title = element_text(face = "bold")
+  )
+
+```
+***
+### Which team has the Highest Proportion of Indiviuals Breaking NCAA Records? 
+
+  Olympians are a representation of the best swimmers each country has to offer to compete against one another to see who is the best. Many individuals pick their college to complete their colliegate career based on many aspects such as coaching staff, student health staff, and other athlete development aspects. Many international Olympics also come to the United States to compete in the NCAA and develop their craft. The teams with Olympians breaking NCAA records are were sorted out and used to make a pie chart to see the proportion each school's record-breaking Olympians compared to the total number of Olympians who have broken NCAA records. 
+  
+***
+
+```{r}
+data$event_type <- NA  # initialize the column
+data$event_type[1:236] <- "Individual"
+data$event_type[237:335] <- "Relay"
+
+relay<- data[237:335, ]
+library(dplyr)
+library(ggplot2)
+
+relay_summary <- relay %>%
+  count(team, name = "records_broken") %>%
+  arrange(desc(records_broken))
+
+ggplot(relay_summary, aes(x = reorder(team, records_broken), y = records_broken, fill = team)) +
+  geom_col(width = 0.7, show.legend = FALSE) +
+  geom_text(aes(label = records_broken), vjust = -0.5, fontface = "bold", size = 4) +
+  scale_fill_manual(values = c(
+    "Virginia" = "#F84C1E", 
+    "Texas" = "#BF5700", 
+    "Stanford" = "#8C1515", 
+    "Florida" = "#0021A5",
+    "Georgia" = "#BA0C2F",
+    "Northwestern" = "#4E2A84",
+    "NC State" = "#CC0000",
+    "Michigan" = "#00274c",
+    "California" = "#003262",
+    "Auburn" = "#E87722",
+    "Arizona" = "#CC0033"
+  )) +
+  labs(
+    title = "Number of NCAA Swimming Relay Records Broken",
+    x = "Team",
+    y = "Relay Records Broken"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold"),
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    axis.title = element_text(face = "bold"),
+    panel.grid.major.y = element_line(color = "gray80", linetype = "dashed"),
+    panel.grid.minor = element_blank()
+  )+
+  expand_limits(y = 20)
+```
+***
+### Team Work Makes the Dream Work
+
+  Relay records were also recorded in this data set, still represented as individual rows. Releys are the top swimmers on each team combined to race with other teams and many give a better picture into the nature of the top of each school's talent without focusing on individuals. Teams that have broken relay records were reocrds and the frequency ploted to compare schools to one another. 
+
+***
+
+```{r}
+five= data[data$season %in% c(2024, 2023, 2022, 2021, 2020), ]
+women5=five[data$gender== "F", ]
+men5=data[data$gender== "M", ]
+```
+
+
+
+```{r}
+library(beeswarm)
+ggplot(relay, aes(x = time_.seconds., y = name, colour = team)) +
+  ggbeeswarm::geom_beeswarm(size = 2) +  # Explicitly calling from ggbeeswarm
+  scale_color_manual(values = team_colors) +  # Apply the color vector
+  xlab("Distance of Relay Event") +
+  ylab("Name of Relay Team") +
+  ggtitle("Records the Each Team Owns for Relays") +
+  labs(color = "College Team")
+```
+***
+### Does Distance Matter? 
+
+  Continuing to look at relays. Distance could also play a role in deciding which team is the best. Some teams are recruit more distance swimmers and some focus on sprinters. As relays are a better picture of the top of each team's talent we can see how each tem performs for relays based upon the distance of the relay. The distances from relays are 100,200,400, and 800 being the longest. 
+  
+***

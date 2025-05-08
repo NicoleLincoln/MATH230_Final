@@ -1,0 +1,30 @@
+name: "alexloz_website"
+title: "Alexandra Lozanguiez"
+description: |
+  My Website
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Past Data Visualizations"
+      menu:
+      - text: "GenRative Artwork"
+        href: GenRative_Artwork.html
+      - text: "GGPlot Extension Project"
+        href: GGPlot_Extenstion_Project.html
+      - text: "Introduction to Statistics Dashboard: Sampling Distribution"
+        href: Sampling_Distribution.html
+      - text: "Panera Pick 2"
+        href: Panera_Pick_2.html
+    - text: "Breaking Waves"
+      menu:
+      - text: "Introduction"
+        href: Intro.html
+      - text: "NCAA Records at a Glance"
+        href: Story_NCAA.html
+      - text: "Who is the Best of the Best"
+        href: about.html
+output: distill::distill_article
+
+

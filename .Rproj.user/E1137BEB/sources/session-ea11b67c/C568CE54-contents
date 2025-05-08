@@ -1,0 +1,55 @@
+---
+title: "Panera Pick 2" 
+description: |
+  These are two of my favorite visualizations that I have made in my class so far. Let me know how they are :)
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+load("plate.sizes.RData")
+library(ggplot2)
+plates$plate.size <- factor(plates$plate.size, labels = c("Small", "Large"))
+
+
+ggplot(plates, aes(x=hunger, y=kcal.consumed,size=like.food, colour = plate.size))+
+  geom_point(alpha = .4)+
+  xlab("Reported Level of Hunger")+
+  ylab("Total Number of Calories Consumed")+
+  labs(title = "Calorie intake is tough to predict", subtitle="At least based on hunger and 
+       likability of food")+
+   scale_color_manual(values=c("#EF5B0C","#003865"))+
+   scale_size_continuous(range = c(3, 10))+
+  guides(
+    color = guide_legend(order = 2),  
+    size = guide_legend(order = 1)  )+
+   guides(color= guide_legend(title = "Plate Size"))+
+   guides(size = guide_legend(title = "Food Likeability"))+ 
+  theme_light()
+```
+***
+### Calorie Intake is difficult to Predict
+
+This dataset was named plates. The data set was collected during research, trying to answer the question: Do people eat more food if their meals are served on larger plates? In row in the data set represents one participant in the study. Some of the variables in this data set include the size of the plate provided, quantity of kcal consumed, mass of food consumed. The variables in the visualization are plate size, food likeability, calories consumed and reported level of hunger. This visualizations shows the correlation that individuals had between their reported level of hunger after lunch and the total number of calories consumed during this experiment. The size of the dots represent how much the individual liked the food, with a larger circle being a higher food likeability score. The color of each dat represents the size of the plate: orange ~ small and blue ~large. The data sets shows that there is not a definite correlation between the variables that is why it is tough to predict calorie intake. 
+
+***
+```{r, echo=FALSE}
+library(Lock5Data)
+library(MASS)
+data(survey)
+survey = survey[complete.cases(survey), ]
+attach(survey)
+ggplot(survey, aes(Pulse, Height)) + 
+  stat_density_2d(aes(fill = after_stat(level)), geom = "polygon", color = "grey",  h = c(20, 25) )+
+  scale_fill_distiller(palette = "Blues")+
+  labs(title = "The Relationship Between Height and Pulse for Individuals")
+```
+
+***
+### The Relationship Between Pulse and Height
+
+The dataset used for this visualization is named survey. It is a survey from individuals taking in data (variables) such as the exercise frequency, smoking status, and age of individual. This is a contour plot with a heatmap of the pulse of an individual as well as the height of the individual. Contour plots allow people to look the the joint distribution of two quantitative variables. The middle circle indicates a central area aof high density for individual's height and pulse. This individuals shows that some of the individuals are concentrated at aorund 70 bpm pulse and a height of around 170 cm. 
+
+***

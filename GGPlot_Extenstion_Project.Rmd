@@ -1,0 +1,30 @@
+---
+title: "GGPlot Extension Project" 
+description: |
+ As a part of our class we had to look beyond typical visualiations, such as bar charts and histograms to creat more creative wasy to visualize information. This is one that I am partically proud of. 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+Water_Taste= Lock5Data::WaterTaste
+attach(Water_Taste)
+library(ggplot2)
+```
+
+```{r, echo=FALSE}
+ggplot(Water_Taste, aes(x = Age, y = FavBotWatBrand,colour = FavBotWatBrand)) +
+  geom_jitter(size=2)+ 
+  xlab("Age of the Individuals (years)")+
+  ylab("Favorite Water Bottle Brands")+
+  ggtitle("Favorite Water Bottle Brands Based on Age")+
+  labs(color = "Favorite Water Bottle Brand")
+```
+***
+### Do Different Age Groups Have a Preference on Water Bottle Brands?
+
+The graph shows the preference that certain individuals have in terms of water bottle brand for their age. The dataset used here was called WaterTaste. The data set has many categorical variables including what type of water the individuals usually drink, the class of the individual (in college), and the gender. Age is the only numeric variable in this data set. 
+
+***

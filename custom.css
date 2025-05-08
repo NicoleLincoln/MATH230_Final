@@ -1,0 +1,17 @@
+/* Style individual tabs by their position */
+.navbar-nav li:nth-child(1) a {
+  background-color: #e3f2fd; /* light blue */
+}
+
+.navbar-nav li:nth-child(2) a {
+  background-color: #00274C; 
+}
+
+.navbar-nav li:nth-child(3) a {
+  background-color:#003262 /* light green */
+}
+
+/* Optional: highlight active tab */
+.navbar-nav li.active a {
+  background-color:#990000 !important;
+}

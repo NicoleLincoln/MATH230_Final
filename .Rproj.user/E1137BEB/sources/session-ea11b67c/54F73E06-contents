@@ -1,0 +1,23 @@
+---
+title: "Intoduction to Statistics Dashboard: Sampling Distribution" 
+description: |
+  Want to learn more about sampling distribution. This interactive can help you help you dive deeper and understand the concept of Sampling Distribution better!
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<iframe src="https://abby-flynt.shinyapps.io/SamplingDistributions_Dashboard_Team1/" class="l-screen-inset shaded" height="1000px"></iframe>
+
+***
+### Exploring Sampling Distribution Dashboard
+
+  The purpose of the dashboard is to explain the concept of sampling distributions of a data set, specifically to an introductory statistics class (MATH 216). Our group wanted to focus on sampling distribution because although we had a good sense of what a sampling distribution is, we all discussed it, and despite this, this was probably the topic that took the most for us to fully solidify as a concept.
+
+  The first interactive explores what a sampling distribution is and compares it to the population distribution. The user can put an infinite number of numbers as a population, and the code takes 10000 samples of size 10, takes the mean of the samples, and shows the sampling distribution. The second page helps the user explore the Central Limit Theorem and Law of Large Numbers, where they manipulate the number of samples and the sample size. 
+
+  Our desired takeaway message is that the sampling distribution is driven by randomness and chance. A single value has the opportunity to change a sampling distribution all together. It all depends on your samples from the population and the random numbers from the population in that sample.
+
+
+***
