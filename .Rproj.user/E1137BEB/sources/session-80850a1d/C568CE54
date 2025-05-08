@@ -1,24 +1,24 @@
 {
-    "id": "FCB01E1E",
-    "path": "C:/Users/aloza/OneDrive/Desktop/Math 230/MATH230_Final/about.Rmd",
-    "project_path": "about.Rmd",
+    "id": "C568CE54",
+    "path": "C:/Users/aloza/OneDrive/Desktop/Math 230/MATH230_Final/Panera_Pick_2.Rmd",
+    "project_path": "Panera_Pick_2.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "1578974606",
     "contents": "",
     "dirty": false,
-    "created": 1746729313575.0,
+    "created": 1746729343565.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 7,
     "properties": {
         "source_window_id": "",
         "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1746587145,
+    "lastKnownWriteTime": 1746642340,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1746587145,
+    "last_content_update": 1746642340,
     "read_only": false,
     "read_only_alternatives": []
 }

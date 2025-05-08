@@ -1,24 +1,24 @@
 {
-    "id": "C568CE54",
-    "path": "C:/Users/aloza/OneDrive/Desktop/Math 230/MATH230_Final/Panera_Pick_2.Rmd",
-    "project_path": "Panera_Pick_2.Rmd",
+    "id": "54F73E06",
+    "path": "C:/Users/aloza/OneDrive/Desktop/Math 230/MATH230_Final/Sampling_Distribution.Rmd",
+    "project_path": "Sampling_Distribution.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "4108602546",
     "contents": "",
     "dirty": false,
-    "created": 1746729343565.0,
+    "created": 1746729350994.0,
     "source_on_save": false,
-    "relative_order": 7,
+    "relative_order": 8,
     "properties": {
         "source_window_id": "",
         "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1746642340,
+    "lastKnownWriteTime": 1746586966,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1746642340,
+    "last_content_update": 1746586966,
     "read_only": false,
     "read_only_alternatives": []
 }

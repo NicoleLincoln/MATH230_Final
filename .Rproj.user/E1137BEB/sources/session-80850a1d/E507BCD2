@@ -1,24 +1,24 @@
 {
-    "id": "7587CBF3",
-    "path": "C:/Users/aloza/OneDrive/Desktop/Math 230/MATH230_Final/Story_NCAA.Rmd",
-    "project_path": "Story_NCAA.Rmd",
+    "id": "E507BCD2",
+    "path": "C:/Users/aloza/OneDrive/Desktop/Math 230/MATH230_Final/Intro.Rmd",
+    "project_path": "Intro.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "2168724062",
     "contents": "",
     "dirty": false,
-    "created": 1746729355556.0,
+    "created": 1746729335554.0,
     "source_on_save": false,
-    "relative_order": 9,
+    "relative_order": 5,
     "properties": {
         "source_window_id": "",
         "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1746640575,
+    "lastKnownWriteTime": 1746639809,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1746640575,
+    "last_content_update": 1746639809,
     "read_only": false,
     "read_only_alternatives": []
 }
